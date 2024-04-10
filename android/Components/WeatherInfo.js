@@ -59,14 +59,13 @@ const WeatherInfo = ({ latitude, longitude }) => {
     const [weatherColor, setWeatherColor] = useState('#4DA0B0');
 
     useEffect(() => {
-        // ... fetchWeather function
     
-        if (data) {
-          const newWeatherCode = data.current.weather[0].id;
-          const newWeatherColor = getWeatherColors(newWeatherCode);
-          setWeatherColor(newWeatherColor); // Update color based on the new weather code
-        }
-      }, [data]);
+      if (data) {
+        const newWeatherCode = data.current.weather[0].id;
+        const newWeatherColor = getWeatherColors(newWeatherCode);
+        setWeatherColor(newWeatherColor); // Update color based on the new weather code
+      }
+    }, [data]);
     
     useEffect(() => {console.log(latitude, longitude)}, []) 
 
@@ -74,7 +73,7 @@ const WeatherInfo = ({ latitude, longitude }) => {
         const apiKey = 'd7d549cd66f7d531611de0319937c1dc';
         const fetchWeather = async () => {
           try {
-            const url = `https://api.openweathermap.org/data/3.0/onecall?lat=${latitude}&lon=${longitude}&exclude=minutely,hourly,daily,alerts&appid=${apiKey}`;
+            const url = `https://api.openweathermap.org/data/3.0/onecall?lat=${latitude}&lon=${longitude}&exclude=minutely,alerts&appid=${apiKey}`;
             const response = await fetch(url);
             if (!response.ok) {
               throw new Error(`API call failed with status: ${response.status}`);
@@ -99,10 +98,15 @@ const WeatherInfo = ({ latitude, longitude }) => {
         return <Text style={{ color: 'red', fontSize: 16, textAlign: 'center', marginTop: 20 }}>Failed to load weather data: {error} params: {latitude}, {longitude}</Text>;
     }
 
-    const weatherCode = data.current.weather[0].id;
+    const getReadableDate = (timestamp) => {
+      const date = new Date(timestamp * 1000);
+      return date.toLocaleTimeString(); // Or format as you like
+    };
+
     const tempCelsius = (data.current.temp - 273.15).toFixed(0);
     const weather = data.current.weather[0];
     const closestCity = getClosestCity(latitude, longitude);
+    
 
     return (
         <ScrollView contentContainerStyle={styles.container}>
@@ -138,17 +142,34 @@ const WeatherInfo = ({ latitude, longitude }) => {
                 </View>
                 ))}
             </View>
+            <View style={styles.forecastCard}>
+                <Text style={styles.cardTitle}>Hourly Forecast</Text>
+                {data.hourly.slice(0, 24).map((hour, index) => ( 
+                    <Text key={index} style={styles.forecastText}>
+                        {new Date(hour.dt * 1000).toLocaleTimeString()}: {(hour.temp - 273.15).toFixed(1)}°C, {hour.weather[0].description}
+                    </Text>
+                ))}
+            </View>
+
+            <View style={styles.forecastCard}>
+                <Text style={styles.cardTitle}>Daily Forecast</Text>
+                {data.daily.slice(0, 7).map((day, index) => ( 
+                    <Text key={index} style={styles.forecastText}>
+                        {new Date(day.dt * 1000).toLocaleDateString()}: {(day.temp.day - 273.15).toFixed(1)}°C, {(day.temp.night - 273.15).toFixed(1)}°C, {day.weather[0].description}
+                    </Text>
+                ))}
+            </View>
         </ScrollView>
         )
 };
     
 
 const styles = StyleSheet.create({
-    container: {
-    flexGrow: 1,
-    alignItems: 'center',
+      container: {
+        flexGrow: 1,
+        alignItems: 'center',
+        paddingTop: 20,
     },
-    
     cityText: {
         fontSize: 40,
         fontWeight: 'bold',
@@ -200,6 +221,24 @@ const styles = StyleSheet.create({
         width: 120,
         height: 120,
         marginBottom: 2,
+    },
+    forecastCard: {
+        backgroundColor: 'rgba(255, 255, 255, 0.3)',
+        borderRadius: 10,
+        padding: 20,
+        marginBottom: 20,
+        width: '90%',
+    },
+    cardTitle: {
+        fontSize: 18,
+        fontWeight: 'bold',
+        color: '#fff',
+        marginBottom: 10,
+    },
+    forecastText: {
+        fontSize: 16,
+        color: '#fff',
+        marginBottom: 5,
     },
 });
 
