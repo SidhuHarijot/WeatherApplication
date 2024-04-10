@@ -1,79 +1,73 @@
-This is a new [**React Native**](https://reactnative.dev) project, bootstrapped using [`@react-native-community/cli`](https://github.com/react-native-community/cli).
+# Weather App
 
-# Getting Started
+This is a weather application built with React Native. It provides real-time weather information based on the user's current location and allows users to search for weather details in different cities.
 
->**Note**: Make sure you have completed the [React Native - Environment Setup](https://reactnative.dev/docs/environment-setup) instructions till "Creating a new application" step, before proceeding.
+## Installation
 
-## Step 1: Start the Metro Server
+After cloning the repo you need to tnstall Node using:
 
-First, you will need to start **Metro**, the JavaScript _bundler_ that ships _with_ React Native.
+```npm init -y```
 
-To start Metro, run the following command from the _root_ of your React Native project:
+Before running the app, you need to install the necessary node modules and React Native dependencies. Run the following commands in your project directory:
 
-```bash
-# using npm
-npm start
+```npm install```
 
-# OR using Yarn
-yarn start
-```
 
-## Step 2: Start your Application
+or if you are using `yarn`, run:
 
-Let Metro Bundler run in its _own_ terminal. Open a _new_ terminal from the _root_ of your React Native project. Run the following command to start your _Android_ or _iOS_ app:
+```yarn install```
 
-### For Android
+This will install all the dependencies in the `node_modules` folder that are defined in your `package.json`.
 
-```bash
-# using npm
-npm run android
+## Modules Required
 
-# OR using Yarn
-yarn android
-```
+Make sure to have the following modules installed:
 
-### For iOS
+- `@react-navigation/native`
+- `@react-navigation/bottom-tabs`
+- `@react-navigation/native-stack`
+- `react-native-vector-icons`
+- `react-native-linear-gradient`
+- `@react-native-community/geolocation` (or `react-native-geolocation-service` if you prefer)
+- `tailwind-rn`
 
-```bash
-# using npm
-npm run ios
+To install these modules, you can run:
 
-# OR using Yarn
-yarn ios
-```
+```npm install @react-navigation/native @react-navigation/bottom-tabs @react-navigation/native-stack react-native-vector-icons react-native-linear-gradient @react-native-community/geolocation tailwind-rn```
 
-If everything is set up _correctly_, you should see your new app running in your _Android Emulator_ or _iOS Simulator_ shortly provided you have set up your emulator/simulator correctly.
+or with `yarn`:
 
-This is one way to run your app — you can also run it directly from within Android Studio and Xcode respectively.
+```yarn add @react-navigation/native @react-navigation/bottom-tabs @react-navigation/native-stack react-native-vector-icons react-native-linear-gradient @react-native-community/geolocation tailwind-rn```
 
-## Step 3: Modifying your App
 
-Now that you have successfully run the app, let's modify it.
+## Usage
 
-1. Open `App.tsx` in your text editor of choice and edit some lines.
-2. For **Android**: Press the <kbd>R</kbd> key twice or select **"Reload"** from the **Developer Menu** (<kbd>Ctrl</kbd> + <kbd>M</kbd> (on Window and Linux) or <kbd>Cmd ⌘</kbd> + <kbd>M</kbd> (on macOS)) to see your changes!
+After installing all the dependencies, you can start the app with:
 
-   For **iOS**: Hit <kbd>Cmd ⌘</kbd> + <kbd>R</kbd> in your iOS Simulator to reload the app and see your changes!
+```npx react-native run-android```
 
-## Congratulations! :tada:
+or
 
-You've successfully run and modified your React Native App. :partying_face:
+```npm run android```
 
-### Now what?
+## Screenshots
 
-- If you want to add this new React Native code to an existing application, check out the [Integration guide](https://reactnative.dev/docs/integration-with-existing-apps).
-- If you're curious to learn more about React Native, check out the [Introduction to React Native](https://reactnative.dev/docs/getting-started).
+### Home Screen
+![Home Screen](./Database/Images/HomeScreen.jpeg)
+*The Home Screen displays the current weather based on the user's location.*
 
-# Troubleshooting
+### Search Bar
+![Search Bar](./Database/Images/SearchWindow.jpeg)
+*The Search Bar appears at the top of the Search Screen.*
 
-If you can't get this to work, see the [Troubleshooting](https://reactnative.dev/docs/troubleshooting) page.
+### Typing in Search Bar
+![Typing in Search Bar](./Database/Images/SearchResults.jpeg)
+*The app begins filtering results as you type in the search bar.*
 
-# Learn More
+### City Weather Details
+![City Weather Details](./Database/Images/SearchCityResult.jpeg)
+*The Weather Details Screen shows up when a city is selected from the search results.*
 
-To learn more about React Native, take a look at the following resources:
+## License
 
-- [React Native Website](https://reactnative.dev) - learn more about React Native.
-- [Getting Started](https://reactnative.dev/docs/environment-setup) - an **overview** of React Native and how setup your environment.
-- [Learn the Basics](https://reactnative.dev/docs/getting-started) - a **guided tour** of the React Native **basics**.
-- [Blog](https://reactnative.dev/blog) - read the latest official React Native **Blog** posts.
-- [`@facebook/react-native`](https://github.com/facebook/react-native) - the Open Source; GitHub **repository** for React Native.
+Include your license information here.
