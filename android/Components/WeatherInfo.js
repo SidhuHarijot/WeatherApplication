@@ -27,28 +27,28 @@ const getWeatherColors = (weatherCode) => {
     console.log(weatherCode);
     if (weatherCode >= 200 && weatherCode < 300) {
       // Thunderstorm
-      return ['#1F1C2C'];
+      return '#1F1C2C';
     } else if (weatherCode >= 300 && weatherCode < 400) {
       // Drizzle
-      return ['#89F7FE'];
+      return '#89F7FE';
     } else if (weatherCode >= 500 && weatherCode < 600) {
       // Rain
-      return ['#005AA7'];
+      return '#005AA7';
     } else if (weatherCode >= 600 && weatherCode < 700) {
       // Snow
-      return ['#E0EAFC'];
+      return '#E0EAFC';
     } else if (weatherCode >= 700 && weatherCode < 800) {
       // Atmosphere (Mist, Smoke, Haze, etc.)
-      return ['#3E5151'];
+      return '#3E5151';
     } else if (weatherCode === 800) {
       // Clear
-      return ['#56CCF2']; // Bright day
+      return '#56CCF2'; // Bright day
     } else if (weatherCode > 800 && weatherCode < 900) {
       // Clouds
-      return ['#D7D2CC'];
+      return '#D7D2CC';
     } else {
       // Default or unknown code
-      return ['#4DA0B0']; // A generic pleasant gradient
+      return '#4DA0B0'; // A generic pleasant gradient
     }
   };
 
@@ -61,11 +61,17 @@ const WeatherInfo = ({ latitude, longitude }) => {
     useEffect(() => {
     
       if (data) {
+        console.log("Data changed: " + data.current.weather[0].id)
         const newWeatherCode = data.current.weather[0].id;
         const newWeatherColor = getWeatherColors(newWeatherCode);
+        console.log("Color Changed: " + newWeatherColor);
         setWeatherColor(newWeatherColor); // Update color based on the new weather code
       }
     }, [data]);
+
+    useEffect(() => {
+      console.log("Weather color updated to: ", weatherColor);
+  }, [weatherColor]);
     
     useEffect(() => {console.log(latitude, longitude)}, []) 
 
